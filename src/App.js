@@ -7,6 +7,7 @@ extend({ OrbitControls })
 const Orbit = () => {
   const { camera, gl } = useThree()
   useEffect(() => {
+    // useEffect : actions qui peuvent affecter d’autres composants et qui ne peuvent pas être réalisées pendant l’affichage
     const controls = new OrbitControls(camera, gl.domElement)
     controls.minDistance = 3
     controls.maxDistance = 20
@@ -19,6 +20,7 @@ const Orbit = () => {
 
 const Box = (props) => {
   const ref = useRef()
+  // useRef va renvoyer un objet modifiable qui n’impactera pas le cycle de vie du composant. 
   useFrame((state) => {
     ref.current.rotation.x += 0.01
     ref.current.rotation.y += 0.01
