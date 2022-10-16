@@ -5,17 +5,28 @@ extend({ DragControls })
 
 const Dragable = (props) => {
   const groupRef = useRef()
+  const controlsRef = useRef()
   const [children, setChildren] = useState([])
-  const { camera, gl } = useThree()
+  const { camera, gl, scene } = useThree()
 
   useEffect(() => {
     setChildren(groupRef.current.children)
   }, [])
 
+  useEffect(() => {
+    controlsRef.current.addEventListener("hoveron", (e) => {
+      console.log(scene)
+      console.log(scene.orbitControls)
+    })
+  }, [children])
+
   return (
     <group ref={groupRef}>
       {/* DragControls = eventDispatcher  */}
-      <dragControls args={[children, camera, gl.domElement]} />
+      <dragControls
+        ref={controlsRef}
+        args={[children, camera, gl.domElement]}
+      />
       {props.children}
     </group>
   )

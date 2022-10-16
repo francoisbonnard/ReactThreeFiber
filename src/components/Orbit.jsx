@@ -8,9 +8,13 @@ const Orbit = () => {
   const { camera, gl } = useThree()
   useEffect(() => {
     // useEffect : actions qui peuvent affecter d’autres composants et qui ne peuvent pas être réalisées pendant l’affichage
-    const controls = new OrbitControls(camera, gl.domElement)
+    const controls = new OrbitControls(camera, gl.domElement, "orbitControls")
+
     controls.minDistance = 3
     controls.maxDistance = 20
+
+    controls.attach = "orbitControls"
+
     return () => {
       controls.dispose()
     }
